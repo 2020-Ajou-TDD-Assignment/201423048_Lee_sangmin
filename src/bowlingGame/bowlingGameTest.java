@@ -35,13 +35,44 @@ public class bowlingGameTest {
 		assertEquals(20, g.score());
 	}
 	
-	@Ignore("until we get design right")
+	
 	@Test
 	public void testOneSpare() {
-		g.roll(5);
-		g.roll(5);
+		rollSpare();
 		g.roll(3);
 		rollMany(17, 0);
 		assertEquals(16, g.score());
+	}
+	
+	@Test
+	public void testOneStrike() {
+		rollStrike();
+		g.roll(3);
+		g.roll(4);
+		rollMany(16, 0);
+		assertEquals(24, g.score());
+	}
+	
+	@Test
+	public void testPerfectGame() {
+		rollMany(12, 10);
+		assertEquals(300, g.score());
+	}
+	
+	@Test
+	public void testTwoStrikes() {
+		rollStrike();
+		rollStrike();
+		rollMany(0, 16);
+		assertEquals(30, g.score());
+	}
+	
+	private void rollStrike()
+	{
+		g.roll(10);
+	}
+	private void rollSpare() {
+		g.roll(5);
+		g.roll(5);
 	}
 }
